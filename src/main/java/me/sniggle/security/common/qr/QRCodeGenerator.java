@@ -29,6 +29,8 @@ import java.util.Map;
 
 /**
  * Created by iulius on 28/06/15.
+ *
+ * The support class to generate a QR code image to share the common secret
  */
 public class QRCodeGenerator {
 
@@ -37,13 +39,19 @@ public class QRCodeGenerator {
   private static final String SCHEME = "otpauth";
 
   /**
+   * helper function to generate the URL later encoded as QR code
    *
    * @param type
+   *  the type of authentication, either TOTP or HOTP
    * @param issuer
+   *   the organization providing the account
    * @param accountName
+   *   the name of the account to be secured
    * @param secret
+   *   the common secret
    * @param parameters
-   * @return
+   *   additional parameters, requirements vary based on type
+   * @return the URL or null in case of error
    * @throws UnsupportedEncodingException
    */
   private String buildUrl(TwoFactorTypes type, String issuer, String accountName, String secret, Map<Parameter, String> parameters) throws UnsupportedEncodingException {
@@ -67,10 +75,13 @@ public class QRCodeGenerator {
   }
 
   /**
+   * validates whether the provided parameters meet the minimum requirements
    *
    * @param type
+   *  the type of authentication, either TOTP or HTOP
    * @param parameters
-   * @return
+   *   the parameters to validate
+   * @return true if minimum requirements are met, otherwise false
    */
   private boolean validateParameters(TwoFactorTypes type, Map<Parameter, String> parameters) {
     LOGGER.trace("validateParameters(TwoFactorTypes, Map<Parameter, String>)");
@@ -108,11 +119,15 @@ public class QRCodeGenerator {
   }
 
   /**
+   * copies the initial parameter list and supplements the list with issuer and secrets
    *
    * @param parameters
+   *  the provided parameters
    * @param secret
+   *  the secret to add as parameter
    * @param issuer
-   * @return
+   *  the issuer to also include as parameter (suggested by Google Authenticator implementation)
+   * @return the final parameter map
    */
   private Map<Parameter, String> prepareParameters(Map<Parameter, String> parameters, String secret, String issuer) {
     LOGGER.trace("prepareParameters(Map<Parameter, String>, String, String)");
@@ -123,8 +138,9 @@ public class QRCodeGenerator {
   }
 
   /**
+   * helper function to setup detail specifications of QR code creation
    *
-   * @return
+   * @return the detailed specification for QR code creation
    */
   private Map<EncodeHintType, Object> prepareEncodeHint() {
     LOGGER.trace("prepareEncodeHint()");
@@ -134,18 +150,24 @@ public class QRCodeGenerator {
   }
 
   /**
+   * renders the QR code image in memory
    *
    * @param width
+   * the canvas width of the image
    * @param height
+   * the canvas height of the image
    * @param bitMatrix
-   * @return
+   * the source bit matrix of the QR code
+   * @return the rendered in memory representation of the QR code
    */
   private RenderedImage renderQRCode(int width, int height, BitMatrix bitMatrix) {
+    LOGGER.trace("renderQRCode(int, int, BitMatrix)");
     BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     Graphics graphics = image.getGraphics();
     graphics.setColor(Color.WHITE);
     graphics.fillRect(0, 0, width, height);
     graphics.setColor(Color.BLACK);
+    LOGGER.debug("draw QR code in memory");
     for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
         if (bitMatrix.get(x, y)) {
@@ -157,13 +179,19 @@ public class QRCodeGenerator {
   }
 
   /**
+   * generates the QR code and provides the binary representation for further usage
    *
    * @param type
+   *  the type of authentication, either TOTP or HTOP
    * @param issuer
+   *  the account providing entity
    * @param accountName
+   *  the account name
    * @param secret
+   *  the commonly shared secret as Hex Binary
    * @param parameters
-   * @return
+   *  additional parameters
+   * @return binary representation of the QR code PNG image
    */
   public byte[] generateQRCode(TwoFactorTypes type, String issuer, String accountName, byte[] secret, Map<Parameter, String> parameters) {
     LOGGER.trace("generateQRCode(TwoFactorTypes, String, String, byte[], Map<Parameter, String>)");
@@ -171,13 +199,19 @@ public class QRCodeGenerator {
   }
 
   /**
+   * generates the QR code and provides the binary representation for further usage
    *
    * @param type
+   *  the type of authentication, either TOTP or HTOP
    * @param issuer
+   *  the account providing entity
    * @param accountName
+   *  the account name
    * @param secret
+   *  the commonly shared secret as Base32 encoded string
    * @param parameters
-   * @return
+   *  additional parameters
+   * @return binary representation of the QR code PNG image
    */
   public byte[] generateQRCode(TwoFactorTypes type, String issuer, String accountName, String secret, Map<Parameter, String> parameters) {
     LOGGER.trace("generateQRCode(TwoFactorTypes, String, String, String, Map<Parameter, String>)");

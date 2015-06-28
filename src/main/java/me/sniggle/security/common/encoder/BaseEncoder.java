@@ -8,6 +8,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Created by iulius on 26/06/15.
+ *
+ * The base class for all message hash encoders
  */
 public abstract class BaseEncoder implements Encoder {
 
@@ -15,11 +17,26 @@ public abstract class BaseEncoder implements Encoder {
 
   private String algorithm;
 
+  /**
+   * constructor
+   *
+   * @param algorithm
+   *  the algorithm to use as required by the Java Crypto API
+   */
   protected BaseEncoder(String algorithm) {
     super();
     this.algorithm = algorithm;
   }
 
+  /**
+   * generates the hash for the given message with the given secret
+   *
+   * @param key
+   *  the key to use
+   * @param message
+   *  the message to hash
+   * @return the hash value
+   */
   public byte[] generateHash(byte[] key, byte[] message) {
     LOGGER.trace("generateHash(byte[], byte[])");
     byte[] result = null;
