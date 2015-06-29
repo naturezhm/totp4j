@@ -2,6 +2,8 @@ package me.sniggle.security.common;
 
 /**
  * Created by iulius on 25/06/15.
+ *
+ * Enumeration of supported Hashing algorithms
  */
 public enum HashAlgorithm {
 
@@ -15,6 +17,10 @@ public enum HashAlgorithm {
     this.keyLength = keyLength;
   }
 
+  /**
+   *
+   * @return the maximum supported key length
+   */
   public int keyLength() {
     return keyLength;
   }
