@@ -9,6 +9,7 @@ import me.sniggle.security.common.TwoFactorTypes;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class QRCodeGeneratorSteps {
 
   @Given("^I have the reference image ([a-z\\-\\.]+)$")
   public void i_have_the_reference_image_REFERENCE_FILE(String referenceFilename) throws Throwable {
-    InputStream in = Files.newInputStream(Paths.get("src/test/resources/me/sniggle/security/common/qr", referenceFilename));
+    InputStream in = Files.newInputStream(Paths.get("src/test/resources/me/sniggle/security/common/qr", System.getenv("TRAVIS_JDK_VERSION"), referenceFilename));
     byte[] buffer = new byte[2048];
     int read = -1;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
