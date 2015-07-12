@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import me.sniggle.security.common.Parameter;
 import me.sniggle.security.common.TwoFactorTypes;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -63,7 +64,7 @@ public class QRCodeGeneratorSteps {
 
   @Then("^I expect the generated image to be identical to the reference image$")
   public void i_expect_the_generated_image_to_be_identical_to_the_reference_image() throws Throwable {
-    assertEquals(referenceFile.length, actualImage.length);
+    assertEquals(Base64.encodeBase64String(actualImage), referenceFile.length, actualImage.length);
     for( int i = 0; i < referenceFile.length; i++ ) {
       assertEquals(referenceFile[i], actualImage[i]);
     }
