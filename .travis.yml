@@ -1,3 +1,9 @@
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "FnFc4SgS8EsjfNtApjytkxbf7iQNruPogT+OMWkE9b6DpB4jd3IAUy65jh3+7afEYBYbnQVH4z18Md1p7Is/xG8qMi10W6P6X72CxwIIfC1fqbOtFKNOM/UZEsV9C0gh/ush/LkFGjZ48uqLGFCO8vyO6BliJDu1jo2tXlBAs2ItWjlicOBHzi/maEmIgbN/HxkgdRrdgzbom+K8FQMPAfWQPaYFAWGdWPifV9oyrL3tGVVQ5yyjl7Nqd8MjXud2WKLUi6B76/pZLw94LkiNSSejumnSVybc5L9Ev888xmhhm3cuh+AwWk1fE+4xiZ2uR0brDHBCKERLY9nckNMgDEQUslqWFF9C4EBwFhYdi9joXgJbK/ICPhk/rdV7+PZIsw6auyaNDtQL75httZO4w/Nwzcs7V6sJtv63Z2NUm4SYMf1CHvgzYOLRgk2N+4/U5Fps2nAdAtImI1c68gGV7NndbJha7FTBc4PaeFGZ3kkXx5a6sGZIz6LhPGRLcLGOcOmddTy9RyVAXrlrsy8cYfBq96F2tOA1BgRzqRW5O4aXW/67FTL1atGt0xlmVUDuvdmQhM0aGI2wKrFgpj0K3+rZADvS79Ed090S2ISvbfngvXe+dX5Agag9OPMYzxICRKO4S64m/OuIp3a5UC091xAwFVwsUAWZdcJAQWXJSuk="
+
 language: java
 jdk:
   - oraclejdk8
@@ -6,3 +12,13 @@ jdk:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+addons:
+  coverity_scan:
+    project:
+      name: "tuxbox/totp4j"
+      description: "Build submitted via Travis CI"
+    notification_email: iulius@sniggle.me
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
