@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +65,7 @@ public class QRCodeGeneratorSteps {
 
   @Then("^I expect the generated image to be identical to the reference image$")
   public void i_expect_the_generated_image_to_be_identical_to_the_reference_image() throws Throwable {
-    assertEquals(Base64.encodeBase64String(actualImage), referenceFile.length, actualImage.length);
+    assertEquals(referenceFile.length, actualImage.length);
     for( int i = 0; i < referenceFile.length; i++ ) {
       assertEquals(referenceFile[i], actualImage[i]);
     }
