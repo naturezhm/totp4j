@@ -16,7 +16,7 @@
     <license>
       <name>BSD 3-clause license</name>
       <distribution>repo</distribution>
-      <url>https://raw.githubusercontent.com/tuxbox/totp4j/master/LICENSE</url>
+      <url>https://raw.githubusercontent.com/tuxbox/totp4j/master/LICENSE.txt</url>
     </license>
   </licenses>
   <scm>
