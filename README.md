@@ -9,6 +9,6 @@ Simple library to enable the simple creation and verification of time-based one 
 
 License
 ========
-This module is licensed under the Apache License Version 2.0.
+This module is licensed under the 3 clause BSD License.
 
 For details refer to the LICENSE.txt
