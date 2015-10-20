@@ -12,3 +12,9 @@ License
 This module is licensed under the 3 clause BSD License.
 
 For details refer to the LICENSE.txt
+
+Examples
+========
+Find examples on how to generate QR codes for your two factor authentication (time-based) scheme, how to generate the time-based tokens and verify those [here in our wiki](https://github.com/tuxbox/totp4j/wiki/Examples).
+
+
