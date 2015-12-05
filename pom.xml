@@ -11,7 +11,7 @@
   <name>totp4j</name>
   <description>Time-based one-time passwords 4 Java - Generates QR codes for TOTPs and verifies entered TOTPs.</description>
 
-  <url>https://github.com/tuxbox/totp4j</url>
+  <url>https://github.com/sniggle/totp4j</url>
   <licenses>
     <license>
       <name>BSD 3-clause license</name>
@@ -20,9 +20,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git@github.com:tuxbox/totp4j.git</connection>
-    <url>scm:git:git@github.com:tuxbox/totp4j.git</url>
-    <developerConnection>scm:git:git@github.com:tuxbox/totp4j.git</developerConnection>
+    <connection>scm:git:git@github.com:sniggle/totp4j.git</connection>
+    <url>scm:git:git@github.com:sniggle/totp4j.git</url>
+    <developerConnection>scm:git:git@github.com:sniggle/totp4j.git</developerConnection>
   </scm>
   <developers>
     <developer>
